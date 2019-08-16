@@ -10,7 +10,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 @SuppressWarnings("unused")
 public class Radio_demo_screen extends BaseClass {
 	
-	public static String primaryInfo  = "{\"user_id\":85,\"executed_user_id\":85,\"is_generate\":false,\"is_execute\":false,\"is_web\":true,\"project_url\":\"https://www.seleniumeasy.com/test/\",\"report_upload_url\":\"https://smartqe.io:443/UploadReportFile\",\"project_name\":\"Testing_Demo\",\"project_description\":\"desc\",\"project_id\":0,\"module_name\":\"web_module\",\"module_description\":\"desc\",\"sub_module_id\":0,\"module_id\":656,\"testcase_name\":\"TC_Radio_button_demo\",\"testcase_id\":561,\"testset_name\":\"TS_auto_demo\",\"testset_id\":83,\"executed_timestamp\":-1712522071,\"browser_type\":\"chrome\",\"testcase_overwrite\":true}";
+	public static String primaryInfo  = "{\"user_id\":85,\"executed_user_id\":85,\"is_generate\":false,\"is_execute\":false,\"is_web\":true,\"project_url\":\"https://www.seleniumeasy.com/test/\",\"report_upload_url\":\"https://smartqe.io:443/UploadReportFile\",\"project_name\":\"Testing_Demo\",\"project_description\":\"desc\",\"project_id\":0,\"module_name\":\"web_module\",\"module_description\":\"desc\",\"sub_module_id\":0,\"module_id\":656,\"testcase_name\":\"TC_Radio_button_demo\",\"testcase_id\":561,\"testset_name\":\"TS_auto_demo\",\"testset_id\":83,\"executed_timestamp\":-1712259299,\"browser_type\":\"chrome\",\"testcase_overwrite\":true}";
 
 	public static String projectName = "testing_demo";
 	public WebDriver driver;
