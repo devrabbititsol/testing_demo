@@ -75,7 +75,7 @@ public class ExtentConfigurations {
 				+ "    <dateFormat>yyyy-MM-dd</dateFormat>\r\n" + "\r\n"
 				+ "    <!-- global time format override -->\r\n" 
 				+ "    <!-- defaults to HH:mm:ss -->\r\n"
-				+ "    <timeFormat>HH:mm:ss</timeFormat>\r\n" + "\r\n" 
+				+ "    <timeFormat>HH:mm '('zzz')'</timeFormat>\r\n" + "\r\n" 
 				+ "    <!-- custom javascript -->\r\n"
 				+ "    <scripts>\r\n" + "      <![CDATA[\r\n" 
 				+ "                $(document).ready(function() {\r\n"
