@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Main Test Suite" parallel="tests">	
-	<test name="chrometest">
-  	<parameter name="browser" value="chrome"/>
-		<classes>
-			<class name="web.testing_demo.web_module.webtestclasses.TC_Input_form_demo" />
-			<class name="com.fileupload.ReportUpload" />
-		</classes>
-	</test>
-	
-	<test name="mozillatest">
-  	<parameter name="browser" value="mozilla"/>
+	<test name="ietest">
+  	<parameter name="browser" value="ie"/>
 		<classes>
 			<class name="web.testing_demo.web_module.webtestclasses.TC_Input_form_demo" />
 			<class name="com.fileupload.ReportUpload" />
