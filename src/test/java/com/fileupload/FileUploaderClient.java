@@ -7,14 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.TimeZone;
 
 import com.utilities.Utilities;
 
 public class FileUploaderClient {
 
 	public void uploadFile(String reportUploadURL, String reportPath, String userId, String executedUserId, String testCaseId, String testSetID, String moduleId,
-			String submoduleId, boolean is_web, String result, String reportstatus, String mobilePlatform) {
+			String submoduleId, boolean is_web, String result, String reportstatus, String mobilePlatform, String client_timezoneId) {
 
 		String charset = "UTF-8";
 		File uploadFile = new File(reportPath);
@@ -41,7 +40,8 @@ public class FileUploaderClient {
 			multipart.addFormField("report_result", result);
 			multipart.addFormField("execution_time", elapsedTime);
 			multipart.addFormField("report_status", reportstatus);
-			multipart.addFormField("client_time_zone_id", TimeZone.getDefault().getID());
+			multipart.addFormField("client_time_zone_id", client_timezoneId);
+			System.out.println("client_time_zone_id"+  client_timezoneId);
 			multipart.addFilePart("file", uploadFile);
 
 			List<String> response = multipart.finish();

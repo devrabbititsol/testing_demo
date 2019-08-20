@@ -2,6 +2,7 @@ package com.utilities;
 
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -57,7 +58,7 @@ public class BaseClass {
 			System.out.println("");
 		}
 		initialInputDataClear(element); // if any text in input it will clear
-		WebDriverWait wait = new WebDriverWait(driver, 120);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 		return wait.until(ExpectedConditions.visibilityOf(element));
 	
 	}
@@ -182,12 +183,15 @@ public class BaseClass {
 				capabilities.setCapability("marionette", true);
 				FirefoxOptions firefoxOptions = new FirefoxOptions(capabilities);
 				firefoxOptions.setBinary(binary);
+			
 				firefoxOptions.addArguments("--no-sandbox"); // Bypass OS security model
 				firefoxOptions.addArguments("--headless"); 
 				driver = new FirefoxDriver(firefoxOptions);
+			
 
 			} else {
 				driver = new FirefoxDriver();
+			//	driver.manage().window().setPosition(new Point(-2000, 0));
 			}
 			
 			System.out.println("FireFox Browser is Launched");
@@ -214,7 +218,8 @@ public class BaseClass {
 			driver = new InternetExplorerDriver(capabilities);
 			System.out.println("IE Browser is Launched");
 		}
-			driver.get(configFileObj.getProperty("URL"));
+		
+		driver.get(configFileObj.getProperty("URL"));
 		if (isSolaris() || isUnix()) {
 			Dimension d = new Dimension(1382, 744);
 			// Resize the current window to the given dimension
@@ -227,6 +232,7 @@ public class BaseClass {
 			Dimension d = new Dimension(screenWidth, screenHeight);
 			// Resize the current window to the given dimension
 			driver.manage().window().setSize(d);
+			//driver.manage().window().setPosition(new Point(-2000, 0));
 		}
 		return driver;
 	}
@@ -249,6 +255,7 @@ public class BaseClass {
 		return (OS.indexOf("sunos") >= 0);
 	}
 
+	//===================== For Report ========================
 	public void testLogHeader(ExtentTest test, String data) {
 		if (test != null)
 			test.log(LogStatus.INFO, "<b style = 'background-color: #ffffff; color : #ff8f00 ; font-size : 18px' >" + data + "</b>");
@@ -256,10 +263,10 @@ public class BaseClass {
 	
 	public String setTestcaseName(String browserName, String tescaseName) {
 		
-		String chromeURL 	= "https://smartqe.io/profile/chrome.jpg";
-		String mozillaURL 	= "https://smartqe.io/profile/mozilla.jpg";
-		String ieURL 		= "https://smartqe.io/profile/ie.jpg";
-		String safariURL 	= "https://smartqe.io/profile/safari.jpg";
+		String chromeURL 	= "https://smartqe.io/pdownload/chrome.jpg";
+		String mozillaURL 	= "https://smartqe.io/pdownload/mozilla.jpg";
+		String ieURL 		= "https://smartqe.io/pdownload/ie.jpg";
+		String safariURL 	= "https://smartqe.io/pdownload/safari.jpg";
 		String finalURL = "";
 		if(browserName.equalsIgnoreCase("chrome")) {
 			finalURL = chromeURL;
@@ -304,6 +311,8 @@ public class BaseClass {
 		test.log(LogStatus.INFO, data);
 	}
 
+	//============= End Report ===============
+	
 	public void tearDown(ExtentReports reports, ExtentTest test) throws Exception {
 		reports.endTest(test);
 		reports.flush();
@@ -330,7 +339,7 @@ public class BaseClass {
 		}
 	}
 
-	public void switchToParentWindow(WebDriver webDriver) {
+	public void switchToParentWindow1(WebDriver webDriver) {
 		if (parentHandle != null && !parentHandle.isEmpty()) {
 			webDriver.switchTo().window(parentHandle);
 		}
@@ -339,8 +348,8 @@ public class BaseClass {
 	// upload a file
 	public void uploadFile(String name, String xpath) {
 		try {
-			WebElement element = driver.findElement(By.xpath(xpath));
-			waitForExpectedElement(driver, element);
+			
+			WebElement element = waitForExpectedElement(driver,By.xpath(xpath));	
 			element.sendKeys(name);
 		} catch (Exception e) {
 			e.getMessage();
@@ -352,6 +361,35 @@ public class BaseClass {
 		Select oSelect = new Select(driver.findElement(By.xpath(xpath)));
 		oSelect.selectByValue(optionName);
 		WebElement option = oSelect.getFirstSelectedOption();
-		return option.getText();
+		option.getText();
+		return "";
 	}
+	
+	
+	public String tableDataHandle(ExtentTest test,String xpath) {
+		List<WebElement> rows;
+		if(xpath.startsWith("//")) {
+			waitForExpectedElement(driver, By.xpath(xpath));
+			xpath = xpath + "/tbody/tr";
+			rows = driver.findElements(By.xpath(xpath));
+		} else {
+			waitForExpectedElement(driver, By.cssSelector(xpath));
+			xpath = xpath + ">tbody>tr";
+			rows = driver.findElements(By.cssSelector(xpath));
+		}
+		//List<WebElement> rows = element.findElements(By.xpath(trXpath));
+		//Print data from each row
+		test.log(LogStatus.INFO, "Number of rows : " + rows.size());
+		for (WebElement row : rows) {
+			  System.out.print(row + "\t");
+		    List<WebElement> cols = row.findElements(By.tagName("td"));
+		    for (WebElement col : cols) {
+		        System.out.print(col.getText() + "\t");
+		    }
+		    System.out.println();
+		}
+		return "" + rows.size();
+
+	}
+	
 }

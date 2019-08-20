@@ -52,6 +52,7 @@ public class ReportUpload extends BaseClass {
 			}
 			
 			System.err.println(Constants.testName);
+			String client_timezoneId = primaryInfoObj.optString("client_timezone_id");
 			String report_upload_url = primaryInfoObj.optString("report_upload_url");
 			String testcaseId = primaryInfoObj.optString("testcase_id");
 			String moduleId = primaryInfoObj.optString("module_id");
@@ -61,7 +62,7 @@ public class ReportUpload extends BaseClass {
 		    String executedUserId = primaryInfoObj.optString("executed_user_id");
 			System.out.println("testcaseid" + testcaseId + ",\nmodule_id" + moduleId + ",\ntestset_id" + testsetId
 					+ ",\nuser_id" + userId + ",\nresult" + resultCount + ",\nreportStatus" + Constants.testName);
-			new FileUploaderClient().uploadFile(report_upload_url, reportsPath, userId,executedUserId, testcaseId, testsetId, moduleId, subModuleId, is_web, resultCount, Constants.testName, mobile);
+			new FileUploaderClient().uploadFile(report_upload_url, reportsPath, userId,executedUserId, testcaseId, testsetId, moduleId, subModuleId, is_web, resultCount, Constants.testName, mobile, client_timezoneId);
 			
 			
 		} catch (Exception e) {
